@@ -1,0 +1,40 @@
+# .gitignore for Django (server folder)
+
+# Python compiled files
+*.pyc
+*.pyo
+__pycache__/
+
+# Environment
+.env
+.env.*
+
+# Media files (your requirement)
+media/
+
+# Database
+*.sqlite3
+db.sqlite3
+
+# Django migrations
+*/migrations/*.pyc
+*/migrations/__pycache__/
+*/migrations/*.py
+
+# Static and compiled files
+staticfiles/
+static/
+
+# Logs
+*.log
+
+# Virtual environment folder
+env/
+venv/
+
+# IDE files (VSCode, PyCharm)
+.vscode/
+.idea/
+
+# MacOS specific
+.DS_Store
