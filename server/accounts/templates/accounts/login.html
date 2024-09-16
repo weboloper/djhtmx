@@ -86,6 +86,7 @@
 
 
 {% block scripts %}
+<script src="{% static 'accounts/js/validation.js' %}"></script>
 <script>
     function loginForm() {
         return {
@@ -93,23 +94,15 @@
             usernameOrEmailError: '',
             password: '',
             passwordError: '',
-     
+            
+
             validateUsernameOrEmail() {
-                if (this.usernameOrEmail.trim() === '') {
-                    this.usernameOrEmailError = 'Username/email can not be empty';
-                } else if (this.usernameOrEmail.length < 3) {
-                    this.usernameOrEmailError = 'Username/email must be at least 3 characters long';
-                } else {
-                    this.usernameOrEmailError = '';
-                }
+                this.usernameOrEmailError = validateUsername(this.usernameOrEmail);
             },
+
             
             validatePassword() {
-                if (this.password.length < 6) {
-                    this.passwordError = 'Password must be at least 6 characters long';
-                } else {
-                    this.passwordError = '';
-                }
+                this.passwordError = validatePassword(this.password);
             },
     
             isFormValid() {
