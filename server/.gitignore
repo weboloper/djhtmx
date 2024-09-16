@@ -18,7 +18,6 @@ db.sqlite3
 # Django migrations
 */migrations/*.pyc
 */migrations/__pycache__/
-*/migrations/*.py
 
 # Ignore collected static files but not app static files
 /staticfiles/
