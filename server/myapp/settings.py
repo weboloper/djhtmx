@@ -11,11 +11,20 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+from decouple import Config, RepositoryEnv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# Load the main .env file
+main_env_config = Config(RepositoryEnv('.env'))
+
+# Determine which .env file to use
+env_file = main_env_config('ENV_FILE', default='.env.local')
+
+# Load the specified environment file
+config = Config(RepositoryEnv(env_file))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/

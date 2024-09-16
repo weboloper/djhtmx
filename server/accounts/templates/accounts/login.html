@@ -94,13 +94,11 @@
             usernameOrEmailError: '',
             password: '',
             passwordError: '',
-            
 
             validateUsernameOrEmail() {
-                this.usernameOrEmailError = validateUsername(this.usernameOrEmail);
+                this.usernameOrEmailError = validateUsernameOrEmail(this.usernameOrEmail);
             },
 
-            
             validatePassword() {
                 this.passwordError = validatePassword(this.password);
             },
