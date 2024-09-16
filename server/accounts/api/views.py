@@ -48,10 +48,12 @@ class RegisterAPIView(APIView):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-
-            token = default_token_generator.make_token(user)
-            uid = urlsafe_base64_encode(force_bytes(user.pk))
-            send_verification_email.delay(user.username, user.email, token, uid )
+            
+            if not settings.EMAIL_IS_VERIFIED_ON_REGISTER:
+                app_url = settings.FRONTEND_URL
+                token = default_token_generator.make_token(user)
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                send_verification_email.delay(app_url, user.username, user.email, token, uid )
 
             return Response( serializer.data , status=status.HTTP_201_CREATED)
         return Response( serializer.errors  , status=status.HTTP_400_BAD_REQUEST)

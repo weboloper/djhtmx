@@ -20,9 +20,13 @@ db.sqlite3
 */migrations/__pycache__/
 */migrations/*.py
 
-# Static and compiled files
-staticfiles/
-static/
+# Ignore collected static files but not app static files
+/staticfiles/
+/static/
+
+# Allow static files inside apps
+!*/static/*
+
 
 # Logs
 *.log

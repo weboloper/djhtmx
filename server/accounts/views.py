@@ -84,10 +84,7 @@ def register_view(request):
             # Set the backend attribute on the user manually
             user.backend = backend
 
-            if settings.EMAIL_IS_VERIFIED_ON_REGISTER:
-                login(request, user, backend=backend)
-                messages.success(request, 'Hesabınız başarıyla oluşturuldu!')
-            else:
+            if not settings.EMAIL_IS_VERIFIED_ON_REGISTER:
                 token = default_token_generator.make_token(user)
                 uid = urlsafe_base64_encode(force_bytes(user.pk))
                 app_url=settings.APP_URL
@@ -96,9 +93,10 @@ def register_view(request):
                     messages.success(request, 'Hesabınızı doğrulamak için lütfen e-postanızı kontrol ediniz!')
                     return redirect('accounts:login')
                 else:
-                    login(request, user, backend=backend)
                     messages.success(request, 'Hesabınızı doğrulamak için e-posta gönderildi. Giriş yapabilirsiniz!')
-                
+                    login(request, user, backend=backend)       
+                    return redirect('accounts:logi')
+            login(request, user, backend=backend)       
             return redirect('home')
         else:
             messages.error(request, 'Please correct the errors below.')
